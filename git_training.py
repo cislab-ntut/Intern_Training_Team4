@@ -74,3 +74,4 @@ def binary_tree(L):
 
 if __name__ == "__main__":
     """ main program here """
+    print(L1_sort(L1))
