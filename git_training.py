@@ -26,9 +26,23 @@ L2 = [5172, 234, 7804, 5519, 2926, 1574, 106, 1290, 9451, 1954, 1457, 5578, 5218
 
 
 def L1_sort(L):
-    """ 第一位任務：
-        將 L1 進行升序排序，排序演算法不限，唯禁止使用內建或第三方函式庫的 sort
-    """
+    def QuickSort(list, m ,n):
+        if(m < n):
+            i = m + 1
+            j = n
+            pivot = list[m]
+            while(i < j):
+                while(list[i] < pivot and i < n):
+                    i = i + 1
+                while(list[j] > pivot and j > m):
+                    j = j - 1
+                if(i < j):
+                    list[i], list[j] = list[j], list[i]
+            list[m], list[j] = list[j], list[m]
+            QuickSort(list, m ,j - 1)
+            QuickSort(list, j + 1 ,n)
+    #end QuickSort
+    QuickSort(L, 0, len(L) - 1)
 
     return L
 
