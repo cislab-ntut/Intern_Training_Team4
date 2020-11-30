@@ -63,13 +63,80 @@ def list_processing(L1, L2):
         3. 取每個 sha256(x) 的最後 9-bit 轉成數字 y (範圍是 0~511) (請將 hash 的結果轉為 binary 再取最後 9-bit)
         4. 將 S 內的第 y 個 bit 設為 1 (每個 y 都要做喔)
     """
+#以下是任務四用到的
+class TreeNode(object):
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+    def setLeft(self, left):
+        self.left = left
+    def setRight(self, right):
+        self.right = right
 
+def binary_insert(root, node):
+       if root is None:
+             root = node
+       else:
+           if root.val > node.val:
+                  if root.left is None:
+                        root.left = node
+                  else:
+                        binary_insert(root.left, node)
+           else:
+                  if root.right is None:
+                        root.right = node
+                  else:
+                        binary_insert(root.right, node)
+
+def level_order(root,length,level):
+    queue = [root]
+    mylist=[0]
+    while len(queue) != 0:
+        curr = queue[0]
+        queue = queue[1:]
+        
+        mylist.append(str(curr.val))
+        #print(str(curr.val) + " ", end = "")
+        if curr.left is not None:
+            queue.append(curr.left)
+        if curr.right is not None:
+            queue.append(curr.right)
 
 def binary_tree(L):
     """ 第四位任務：
         將 L1’ 與 L2’ 交集後的結果建成 binary tree(盡可能平衡) 並輸出
     """
+    length=len(L)
+    r=TreeNode(L[0])
+    level=0
+    
+    for i in range(1,length):
+        binary_insert(r,TreeNode(L[i]))
+    n=length
+    i=1
+    while(n>0):
+        n-=i
+        level+=1
+        i*=2
+    time=1
+    #for j in range(level):
+      #  print(" ", end = '')
+    print(L[0])
+
+    for i in range(1,level):
+       # for j in range(level-i):
+        #    print(" ", end = '')
+        for j in range(i*2):
+            if time<length:
+                print(L[time], end = '')
+                print(" ", end = '')
+                time+=1
+        print(" ")
     pass
+##
+      #L=[1,2,3,4,5,6,7,8,9,0,11,12,13,14,15]
+      binary_tree(L)
+    #pass
 
 
 if __name__ == "__main__":
